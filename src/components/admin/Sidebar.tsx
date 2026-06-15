@@ -14,21 +14,13 @@ import {
   Calendar, 
   CheckCircle, 
   UserPlus,
-  FileText, // For Pages
+  FileText,
   LogOut,
   ChevronDown,
   Briefcase,
   Archive,
   Heart,
-  Info,
-  BarChart3,
-  Building2,
-  BookOpen,
-  Users2,
-  Milestone,
-  HandHeart,
-  Utensils,
-  Activity
+  ImageIcon,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -52,41 +44,34 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, userRole }) => {
   };
 
   const menuItems = [
-    { title: 'Dashboard', icon: LayoutDashboard, path: '/admin', tab: 'dashboard' },
+    { title: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard', tab: 'dashboard' },
     { title: 'Messages', icon: MessageSquare, path: '/admin/messages' },
     { 
       title: 'Jobs', 
       icon: Briefcase, 
       id: 'jobs',
       subItems: [
-        { title: 'Add Job', icon: PlusCircle, path: '/admin', tab: 'addjob' },
-        { title: 'Recent Jobs', icon: Briefcase, path: '/admin', tab: 'recentjobs' },
-        { title: 'Old Jobs', icon: Archive, path: '/admin', tab: 'oldjobs' },
-        { title: 'Role Responses', icon: ClipboardCheck, path: '/admin', tab: 'jobresponse' },
-        { title: 'Job Applications', icon: Users, path: '/admin', tab: 'jobapplications' },
+        { title: 'Add Job', icon: PlusCircle, path: '/admin/dashboard', tab: 'addjob' },
+        { title: 'Recent Jobs', icon: Briefcase, path: '/admin/dashboard', tab: 'recentjobs' },
+        { title: 'Old Jobs', icon: Archive, path: '/admin/dashboard', tab: 'oldjobs' },
+        { title: 'Role Responses', icon: ClipboardCheck, path: '/admin/dashboard', tab: 'jobresponse' },
+        { title: 'Job Applications', icon: Users, path: '/admin/dashboard', tab: 'jobapplications' },
       ]
     },
-    { title: 'Candidates', icon: Users, path: '/admin', tab: 'candidates' },
-    { title: 'Interview', icon: Calendar, path: '/admin', tab: 'interview' },
-    { title: 'Hired', icon: UserCheck, path: '/admin', tab: 'hired' },
-    { title: 'Volunteers', icon: Heart, path: '/admin', tab: 'volunteers' },
+    { title: 'Candidates', icon: Users, path: '/admin/dashboard', tab: 'candidates' },
+    { title: 'Interview', icon: Calendar, path: '/admin/dashboard', tab: 'interview' },
+    { title: 'Hired', icon: UserCheck, path: '/admin/dashboard', tab: 'hired' },
+    { title: 'Volunteers', icon: Heart, path: '/admin/dashboard', tab: 'volunteers' },
     ...(userRole === 'SUPER_ADMIN' ? [
-      { title: 'Activity Log', icon: History, path: '/admin', tab: 'auditlogs' },
+      { title: 'Activity Log', icon: History, path: '/admin/dashboard', tab: 'auditlogs' },
       { 
-        title: 'CMS', 
+        title: 'CMS (Payload)', 
         icon: FileText, 
         id: 'cms',
         subItems: [
-          { title: 'Home page Who We Are?', icon: Info, path: '/admin/cms/home', tab: 'who-we-are' },
-          { title: 'Our Impact in Numbers', icon: BarChart3, path: '/admin/cms/home', tab: 'impact' },
-          { title: 'Generous Partners', icon: Building2, path: '/admin/cms/home', tab: 'partners' },
-          { title: 'Stories of Impact', icon: BookOpen, path: '/admin/cms/home', tab: 'stories' },
-          { title: 'About us Our Organization', icon: Users2, path: '/admin/cms/about', tab: 'organization' },
-          { title: 'Our Journey', icon: Milestone, path: '/admin/cms/about', tab: 'journey' },
-          { title: 'MC Our Kind Supporters', icon: Heart, path: '/admin/cms/medical-center', tab: 'supporters' },
-          { title: 'MC Our Services', icon: Activity, path: '/admin/cms/medical-center', tab: 'mc-services' },
-          { title: 'ANCH Charity Program', icon: HandHeart, path: '/admin/cms/anch', tab: 'charity' },
-          { title: 'Food Distribution Centers', icon: Utensils, path: '/admin/cms/food', tab: 'distribution' },
+          { title: 'All Pages', icon: FileText, path: '/admin/dashboard', tab: 'cmspages' },
+          { title: 'Media Library', icon: ImageIcon, path: '/cms-admin/collections/media', tab: '' },
+          { title: 'Admin Users', icon: Users, path: '/cms-admin/collections/users', tab: '' },
         ]
       }
     ] : [])
@@ -97,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, userRole }) => {
     try {
       const res = await fetch("/api/auth/logout", { method: "POST" });
       if (res.ok) {
-        window.location.href = "/admin/login";
+        window.location.href = "/admin";
       }
     } catch (err) {
       console.error("Logout error:", err);
@@ -137,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, userRole }) => {
             if (item.subItems) {
               const isSubMenuOpen = openSubMenus[item.id!];
               const isAnySubActive = item.subItems.some(sub => 
-                pathname === sub.path && (!sub.tab || currentTab === sub.tab)
+                sub.tab ? (pathname === sub.path && currentTab === sub.tab) : pathname === sub.path
               );
               
               return (
@@ -158,11 +143,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, userRole }) => {
                   <div className={`overflow-hidden transition-all duration-300 ${isSubMenuOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="pl-10 flex flex-col gap-1 py-2">
                       {item.subItems.map((sub: any) => {
-                        const isSubActive = pathname === sub.path && currentTab === sub.tab;
+                        const isSubActive = sub.tab
+                          ? (pathname === sub.path && currentTab === sub.tab)
+                          : (pathname === sub.path);
                         const href = sub.tab ? `${sub.path || ''}?tab=${sub.tab}` : (sub.path || '#');
                         return (
                           <Link
-                            key={sub.tab || sub.path}
+                            key={sub.title}
                             href={href}
                             onClick={onClose}
                             className={`w-full text-left px-4 py-3 rounded-xl flex flex-row items-center gap-3 transition-all duration-300 relative group whitespace-nowrap ${
@@ -187,7 +174,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, userRole }) => {
               ? (pathname === item.path && currentTab === item.tab)
               : (pathname === item.path || (item.path === '/admin/cms' && pathname.startsWith('/admin/cms')));
               
-            const href = item.tab && item.path === '/admin' ? (item.tab === 'dashboard' ? '/admin' : `/admin?tab=${item.tab}`) : (item.path || '#');
+            const href = item.tab && item.path === '/admin/dashboard' ? (item.tab === 'dashboard' ? '/admin/dashboard' : `/admin/dashboard?tab=${item.tab}`) : (item.path || '#');
             return (
               <Link
                 key={item.tab || item.path}

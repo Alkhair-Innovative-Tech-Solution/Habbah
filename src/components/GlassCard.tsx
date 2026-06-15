@@ -7,9 +7,10 @@ interface GlassCardProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  style?: React.CSSProperties;
 }
 
-export default function GlassCard({ children, className = "", delay = 0 }: GlassCardProps) {
+export default function GlassCard({ children, className = "", delay = 0, style }: GlassCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -25,6 +26,7 @@ export default function GlassCard({ children, className = "", delay = 0 }: Glass
         scale: 1.02,
         transition: { duration: 0.3 } 
       }}
+      style={style}
       className={`glass rounded-[2.5rem] p-8 group relative overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,195,0,0.15)] ${className}`}
     >
       {/* Subtle Shine Effect */}

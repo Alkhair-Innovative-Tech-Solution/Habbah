@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@source "../app/(main)/";
+@source "../components/";
+@source "../blocks/";
 
 @theme inline {
   --color-darkblue: #03045e;
@@ -10,6 +13,7 @@
 
   --color-idara-navy: #03045e;
   --color-idara-orange: #ffc300;
+  --color-idara-orange-deep: #f97316;
   --color-idara-cyan: #00bfe6;
   
   --font-sans: var(--font-montserrat);
@@ -50,7 +54,7 @@ body {
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-linear-to-br from-white via-lightblue to-yellow bg-size-[200%_auto]; 
+  @apply bg-clip-text text-transparent bg-linear-to-br from-white via-lightblue to-yellow bg-[size:200%_auto]; 
   animation: shine 2s linear infinite;
 }
 

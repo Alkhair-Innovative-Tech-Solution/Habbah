@@ -10,12 +10,18 @@
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
+    "cms:seed": "node scripts/seed-cms.mjs",
     "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.85.0",
+    "@payloadcms/next": "^3.85.0",
+    "@payloadcms/richtext-lexical": "^3.85.0",
+    "@payloadcms/translations": "^3.85.0",
+    "@payloadcms/ui": "^3.85.0",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@types/bcryptjs": "^2.4.6",
@@ -27,6 +33,7 @@
     "lucide-react": "^1.14.0",
     "next": "16.2.6",
     "nodemailer": "^8.0.10",
+    "payload": "^3.85.0",
     "prisma": "^7.8.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"

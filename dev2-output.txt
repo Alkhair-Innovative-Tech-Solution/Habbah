@@ -1,0 +1,41 @@
+﻿
+> habbah@0.1.0 dev
+> next dev
+
+Γû▓ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.100.91:3000
+- Environments: .env
+Γ£ô Ready in 2.5s
+node.exe : ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+At C:\Program Files\nodejs\npm.ps1:28 char:3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ΓÜá The "middle...leware-to-proxy:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+- Experiments (use with caution):
+  Γ¿» turbopackServerFastRefresh
+
+[browser] Uncaught TypeError: network error
+TypeError: network error
+Γùï Compiling / ...
+ GET / 200 in 7.0s (next.js: 4.3s, application-code: 2.7s)
+ GET / 200 in 7.2s (next.js: 4.7s, application-code: 2.5s)
+[Γú╖] Pulling schema from database...
+[2K[1G[Γú»] Pulling schema from database...
+[2K[1G[Γúƒ] Pulling schema from database...
+[2K[1G[Γí┐] Pulling schema from database...
+[2K[1G[Γó┐] Pulling schema from database...
+[2K[1G[Γú╗] Pulling schema from database...
+[2K[1G[Γú╜] Pulling schema from database...
+[2K[1G[Γú╖] Pulling schema from database...
+[2K[1G[Γ£ô] Pulling schema from database...
+[?25l
+Is enum_users_role enum created or renamed from another enum?
+Γ¥» + enum_users_role                     create enum
+  ~ AdminRole ΓÇ║ enum_users_role         rename enum
+  ~ ApplicationStatus ΓÇ║ enum_users_role rename enum
+  ~ JobType ΓÇ║ enum_users_role           rename enum
+  ~ VolunteerStatus ΓÇ║ enum_users_role   rename enum GET /cms-admin 200 in 15.0s (next.js: 2.4s, application-code: 12.6s)

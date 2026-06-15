@@ -1,0 +1,10 @@
+node_modules
+.next
+.git
+*.log
+*output.txt
+.opencode
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+*.local

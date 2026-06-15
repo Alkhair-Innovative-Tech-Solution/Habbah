@@ -1,0 +1,153 @@
+:root {
+  --theme-bg: #f8fafc;
+  --theme-elevation-0: #ffffff;
+  --theme-elevation-50: #f1f5f9;
+  --theme-elevation-100: #e2e8f0;
+  --theme-elevation-150: #cbd5e1;
+  --theme-elevation-250: #94a3b8;
+  --theme-elevation-400: #64748b;
+  --theme-elevation-500: #475569;
+  --theme-elevation-600: #334155;
+  --theme-elevation-700: #1e293b;
+  --theme-elevation-800: #0f172a;
+  --theme-elevation-900: #020617;
+  --theme-baseline: 8px;
+  --theme-input-bg: #ffffff;
+  --theme-success-100: #dcfce7;
+  --theme-success-500: #22c55e;
+  --theme-error-100: #fee2e2;
+  --theme-error-500: #ef4444;
+  --theme-warning-100: #fef3c7;
+  --theme-warning-500: #f59e0b;
+}
+
+html[data-theme="dark"] {
+  --theme-bg: #0f172a;
+  --theme-elevation-0: #020617;
+  --theme-elevation-50: #0f172a;
+  --theme-elevation-100: #1e293b;
+  --theme-elevation-150: #334155;
+  --theme-elevation-250: #475569;
+  --theme-elevation-400: #64748b;
+  --theme-elevation-500: #94a3b8;
+  --theme-elevation-600: #cbd5e1;
+  --theme-elevation-700: #e2e8f0;
+  --theme-elevation-800: #f1f5f9;
+  --theme-elevation-900: #ffffff;
+  --theme-input-bg: #1e293b;
+}
+
+.step-nav__step::before,
+.step-nav__step::after {
+  background-color: var(--theme-elevation-150);
+}
+
+.nav {
+  background: linear-gradient(135deg, #03045e, #001d3d);
+}
+
+.nav__brand .nav__label {
+  color: #ffc300;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.nav-group__label {
+  color: rgba(255,255,255,0.6);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.65rem;
+}
+
+.nav a, .nav button {
+  color: rgba(255,255,255,0.8);
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+}
+
+.nav a:hover, .nav button:hover {
+  background: rgba(255,195,0,0.15);
+  color: #ffc300;
+}
+
+.nav a.active, .nav button.active {
+  background: rgba(255,195,0,0.2);
+  color: #ffc300;
+  font-weight: 700;
+}
+
+.btn--style-primary {
+  background: #03045e;
+  border-color: #03045e;
+}
+
+.btn--style-primary:hover {
+  background: #ffc300;
+  border-color: #ffc300;
+}
+
+.btn--style-secondary {
+  border-color: #03045e;
+  color: #03045e;
+}
+
+.entity-header {
+  background: var(--theme-elevation-0);
+  border-bottom: 1px solid var(--theme-elevation-100);
+}
+
+.auth-fields input, .field-type input, .field-type textarea, .field-type select {
+  border-radius: 0.75rem;
+  border: 2px solid var(--theme-elevation-100);
+  transition: all 0.2s;
+}
+
+.auth-fields input:focus, .field-type input:focus, .field-type textarea:focus, .field-type select:focus {
+  border-color: #ffc300;
+  box-shadow: 0 0 0 4px rgba(255,195,0,0.1);
+}
+
+.card {
+  border-radius: 1.5rem;
+  border: 1px solid var(--theme-elevation-100);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: all 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.pill--style-light {
+  background: #e6faff;
+  color: #03045e;
+}
+
+.dashboard__label {
+  color: var(--theme-elevation-400);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+}
+
+.dashboard__card {
+  border-radius: 1.5rem;
+  border: 1px solid var(--theme-elevation-100);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.render-field .field-type {
+  margin-bottom: 1rem;
+}
+
+.rich-text-lexical .editor-container {
+  border-radius: 0.75rem;
+  border: 2px solid var(--theme-elevation-100);
+}
+
+.rich-text-lexical .editor-container:focus-within {
+  border-color: #ffc300;
+  box-shadow: 0 0 0 4px rgba(255,195,0,0.1);
+}
