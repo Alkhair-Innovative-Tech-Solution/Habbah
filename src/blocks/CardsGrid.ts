@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const cardsGridBlock: Block = {
   slug: "cards-grid",
@@ -29,10 +30,6 @@ export const cardsGridBlock: Block = {
       ],
       defaultValue: "3",
     },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
-    { name: "cardBgColor", type: "text", label: "Card Background Color (Hex)" },
-    { name: "cardTextColor", type: "text", label: "Card Text Color (Hex)" },
+    ...backgroundFields,
   ],
 };

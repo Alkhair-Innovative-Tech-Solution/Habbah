@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const timelineBlock: Block = {
   slug: "timeline",
@@ -17,8 +18,6 @@ export const timelineBlock: Block = {
         { name: "icon", type: "text", label: "Icon Name (lucide-react)" },
       ],
     },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
+    ...backgroundFields,
   ],
 };

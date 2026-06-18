@@ -6,9 +6,11 @@ interface SectionHeaderProps {
   title: string;
   subtitle?: string;
   center?: boolean;
+  headingColor?: string;
+  textColor?: string;
 }
 
-export default function SectionHeader({ title, subtitle, center = true }: SectionHeaderProps) {
+export default function SectionHeader({ title, subtitle, center = true, headingColor, textColor }: SectionHeaderProps) {
   return (
     <div className={`mb-12 ${center ? "text-center" : "text-left"}`}>
       <div className={`flex items-center ${center ? "justify-center" : "justify-start"} gap-4 md:gap-8`}>
@@ -20,6 +22,7 @@ export default function SectionHeader({ title, subtitle, center = true }: Sectio
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-darkblue tracking-tight"
+          style={headingColor ? { color: headingColor } : undefined}
         >
           {title.split(' ').map((word, i) => {
             const words = title.split(' ');
@@ -44,6 +47,7 @@ export default function SectionHeader({ title, subtitle, center = true }: Sectio
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
           className="mt-4 text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+          style={textColor ? { color: textColor } : undefined}
         >
           {subtitle}
         </motion.p>

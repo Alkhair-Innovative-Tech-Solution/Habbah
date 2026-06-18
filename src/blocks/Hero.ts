@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const heroBlock: Block = {
   slug: "hero",
@@ -26,17 +27,6 @@ export const heroBlock: Block = {
         { name: "label", type: "text", required: true },
       ],
     },
-    {
-      name: "backgroundType",
-      type: "select",
-      options: [
-        { label: "Dark Blue", value: "darkblue" },
-        { label: "Light", value: "light" },
-      ],
-      defaultValue: "darkblue",
-    },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
+    ...backgroundFields,
   ],
 };

@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const jobsSectionBlock: Block = {
   slug: "jobs-section",
@@ -13,8 +14,6 @@ export const jobsSectionBlock: Block = {
       label: "Message when no jobs available",
       defaultValue: "No open positions at this time.",
     },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
+    ...backgroundFields,
   ],
 };

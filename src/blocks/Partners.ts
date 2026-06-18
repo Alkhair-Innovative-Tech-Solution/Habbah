@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const partnersBlock: Block = {
   slug: "partners",
@@ -16,8 +17,6 @@ export const partnersBlock: Block = {
         { name: "website", type: "text" },
       ],
     },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
+    ...backgroundFields,
   ],
 };

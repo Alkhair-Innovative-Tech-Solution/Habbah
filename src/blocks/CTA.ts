@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const ctaBlock: Block = {
   slug: "cta",
@@ -14,17 +15,6 @@ export const ctaBlock: Block = {
         { name: "link", type: "text" },
       ],
     },
-    {
-      name: "backgroundType",
-      type: "select",
-      options: [
-        { label: "Dark", value: "dark" },
-        { label: "Light", value: "light" },
-      ],
-      defaultValue: "dark",
-    },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
+    ...backgroundFields,
   ],
 };

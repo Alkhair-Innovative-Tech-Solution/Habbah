@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { backgroundFields } from "@/fields/StyleFields";
 
 export const testimonialsBlock: Block = {
   slug: "testimonials",
@@ -18,10 +19,6 @@ export const testimonialsBlock: Block = {
         { name: "image", type: "upload", relationTo: "media" },
       ],
     },
-    { name: "textColor", type: "text", label: "Text Color Override (Hex)" },
-    { name: "backgroundColor", type: "text", label: "Background Color Override (Hex)" },
-    { name: "backgroundImage", type: "text", label: "Background Image URL" },
-    { name: "cardBgColor", type: "text", label: "Card Background Color (Hex)" },
-    { name: "cardTextColor", type: "text", label: "Card Text Color (Hex)" },
+    ...backgroundFields,
   ],
 };
