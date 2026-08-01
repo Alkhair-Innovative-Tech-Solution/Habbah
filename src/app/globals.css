@@ -7,8 +7,29 @@
   --color-gray: #36454f;
   --color-webblack: #00171f;
   --color-bglightblue: #e6faff;
-  
+
+  /* === Habbah identity palette (new brand system) === */
+  --color-green-deep: #1A3528;
+  --color-green-rich: #2C5440;
+  --color-green-mid: #3D7A5C;
+  --color-green-light: #6BAF8A;
+
+  --color-gold-deep: #A67C2E;
+  --color-gold-rich: #C9A24B;
+  --color-gold-shine: #E8C96B;
+  --color-gold-pale: #F5E9C4;
+
+  --color-cream: #FAF6EE;
+  --color-cream-warm: #F0E9D8;
+  --color-off-white: #FDF9F3;
+  --color-charcoal: #1C1C1C;
+  --color-charcoal-soft: #3A3A3A;
+
   --font-sans: var(--font-montserrat);
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-dm-sans);
+  --font-arabic: var(--font-amiri);
+  --font-urdu: var(--font-noto-nastaliq);
 
   --animate-float: float 3s ease-in-out infinite;
   --animate-shine: shine 2s linear infinite;
@@ -25,6 +46,17 @@
 }
 
 :root {
+  --shimmer-gradient: linear-gradient(
+    105deg,
+    var(--color-gold-rich) 0%,
+    var(--color-gold-shine) 35%,
+    var(--color-gold-pale) 50%,
+    var(--color-gold-shine) 65%,
+    var(--color-gold-rich) 100%
+  );
+}
+
+:root {
   --background: #ffffff;
   --foreground: #00171f;
 }
@@ -32,8 +64,6 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  background-image: radial-gradient(#00bfe610 1px, transparent 1px);
-  background-size: 30px 30px;
 }
 
 /* Custom Utilities */
@@ -52,4 +82,34 @@ body {
 
 .text-shadow-lg {
   text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* === Habbah brand utilities === */
+.font-arabic {
+  font-family: var(--font-arabic), serif;
+  direction: rtl;
+}
+
+.font-urdu {
+  font-family: var(--font-urdu), serif;
+  direction: rtl;
+}
+
+.gold-shimmer-text {
+  background: var(--shimmer-gradient);
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Light glass panel for cream/off-white sections (info cards, map overlays) */
+.glass-brand {
+  @apply backdrop-blur-xl bg-off-white/70 border border-gold-rich/20 shadow-[0_8px_32px_0_rgba(26,53,40,0.08)];
+}
+
+/* Dark green glass for navbar-over-hero, dark CTA bands */
+.glass-brand-dark {
+  @apply backdrop-blur-xl bg-green-deep/90 border border-gold-rich/10 shadow-2xl;
 }

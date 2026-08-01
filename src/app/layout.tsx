@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Cormorant_Garamond, DM_Sans, Amiri, Noto_Nastaliq_Urdu } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -7,9 +7,35 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
+
+const amiri = Amiri({
+  variable: "--font-amiri",
+  subsets: ["arabic"],
+  style: ["normal", "italic"],
+  weight: ["400", "700"],
+});
+
+const notoNastaliqUrdu = Noto_Nastaliq_Urdu({
+  variable: "--font-noto-nastaliq",
+  subsets: ["arabic"],
+  weight: ["400", "600"],
+});
+
 export const metadata: Metadata = {
-  title: "Habbah Educational Trust",
-  description: "Empowering Future Leaders Through Education",
+  title: "Habbah Education Trust — Small seeds. Lasting growth.",
+  description: "Helping young people stand with dignity, rise with purpose, and serve with responsibility.",
 };
 
 import Navbar from "@/components/Navbar";
@@ -21,11 +47,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} antialiased`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${cormorantGaramond.variable} ${dmSans.variable} ${amiri.variable} ${notoNastaliqUrdu.variable} antialiased`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-white font-sans text-gray flex flex-col" suppressHydrationWarning>
         <Navbar />
-        <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-        <main className="grow pt-24">{children}</main>
+        <main className="grow">{children}</main>
         <Footer />
       </body>
     </html>

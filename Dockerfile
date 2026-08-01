@@ -9,6 +9,13 @@ RUN npm ci
 COPY . .
 
 RUN npx prisma generate
+
+# next build statically imports API routes to collect page data, which
+# instantiates PrismaClient at module scope. Prisma 7's client engine
+# validates its adapter at construction time, so a DATABASE_URL must be
+# present even though no connection is actually made during the build.
+# The real value is supplied at runtime via docker-compose.
+ENV DATABASE_URL="postgresql://postgres:password@postgres-db:5432/habbah_db"
 RUN npm run build
 
 # Install postgres client tools so startup can wait for DB readiness
