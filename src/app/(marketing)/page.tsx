@@ -13,7 +13,6 @@ import {
 import SectionHeader from "@/components/SectionHeader";
 import GlassCard from "@/components/GlassCard";
 import Hero from "@/components/home/Hero";
-import AyahBlock from "@/components/home/AyahBlock";
 import { gsap } from "@/lib/gsap";
 
 const WHY_CHOOSE = [
@@ -110,7 +109,6 @@ export default function Home() {
   return (
     <div ref={rootRef} className="flex flex-col gap-24 pb-24">
       <Hero />
-      <AyahBlock />
 
       {/*
         NOTE: copy below is unchanged per the visual-only redesign scope —
@@ -119,7 +117,7 @@ export default function Home() {
       */}
 
       {/* Why Choose Habbah */}
-      <section className="container mx-auto px-4">
+      <section id="explore" className="container mx-auto px-4 scroll-mt-24">
         <SectionHeader
           title="Why choose Habbah"
           subtitle="Discover how we support students in achieving their academic dreams through a sustainable and trust-based model."
