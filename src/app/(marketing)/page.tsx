@@ -229,7 +229,8 @@ export default function Home() {
           {/* Right Column: Map */}
           <div className="reach-map h-137.5 lg:h-full min-h-137.5 rounded-[3.5rem] overflow-hidden shadow-2xl relative border-8 border-off-white group">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3617.202302324915!2d67.005328!3d24.902718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f9015555555%3A0x8b3e3e3e3e3e3e3e!2sGeneration's+School!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s"
+              src="https://maps.google.com/maps?q=Generation%27s+School+South+Campus%2C+SITE%2C+Karachi%2C+Pakistan&output=embed"
+              title="Map showing Habbah's office at Generation's School South Campus, SITE, Karachi"
               width="100%"
               height="100%"
               style={{ border: 0 }}

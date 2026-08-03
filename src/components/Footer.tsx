@@ -58,10 +58,16 @@ export default function Footer() {
               Join us in building a more equitable future.
             </p>
             <div className="flex gap-5">
-              {[Globe, Send, Camera].map((Icon, i) => (
+              {/* TODO: hrefs are placeholders until real social profile URLs are provided. */}
+              {[
+                { Icon: Globe, label: "Habbah website" },
+                { Icon: Send, label: "Habbah on Telegram" },
+                { Icon: Camera, label: "Habbah on Instagram" },
+              ].map(({ Icon, label }) => (
                 <Link
-                  key={i}
+                  key={label}
                   href="#"
+                  aria-label={label}
                   className="p-3 bg-off-white/5 rounded-2xl hover:bg-gold-rich hover:text-green-deep transition-all duration-300 hover:-translate-y-1"
                 >
                   <Icon className="w-5 h-5" />
@@ -100,10 +106,10 @@ export default function Footer() {
             <h4 className="font-body text-lg font-medium uppercase tracking-[0.2em] text-gold-rich mb-8">Initiatives</h4>
             <ul className="space-y-5">
               {[
-                { label: "Interest-free Loans", href: "#" },
-                { label: "Scholarships", href: "#" },
-                { label: "Mentorship", href: "#" },
-                { label: "Career Guidance", href: "#" },
+                { label: "Interest-free Loans", href: "/about#programs" },
+                { label: "Scholarships", href: "/about#programs" },
+                { label: "Mentorship", href: "/about#programs" },
+                { label: "Career Guidance", href: "/careers" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link

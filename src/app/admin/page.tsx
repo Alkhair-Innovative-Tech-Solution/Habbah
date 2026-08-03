@@ -28,6 +28,7 @@ import {
   ArrowRight,
   TrendingUp,
 } from "lucide-react";
+import { GENERAL_INTEREST_JOB_ID } from "@/lib/constants";
 
 export default function AdminPage() {
   return (
@@ -146,11 +147,11 @@ function AdminContent() {
 
   // âœ… Application Segmentation Logic
   const specificJobApps = useMemo(() => {
-    return jobResponses.filter(res => res.jobId !== 4);
+    return jobResponses.filter(res => res.jobId !== GENERAL_INTEREST_JOB_ID);
   }, [jobResponses]);
 
   const generalInterestApps = useMemo(() => {
-    return jobResponses.filter(res => res.jobId === 4);
+    return jobResponses.filter(res => res.jobId === GENERAL_INTEREST_JOB_ID);
   }, [jobResponses]);
 
   // ✅ HEADER/FOOTER HIDE KARNE WALA USEEFFECT

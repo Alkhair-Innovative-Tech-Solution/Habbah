@@ -145,7 +145,8 @@ export default function Contact() {
 
           <div className="reach-map-panel relative rounded-[4rem] overflow-hidden shadow-2xl border-8 border-off-white min-h-125 group">
             <iframe
-              src="https://maps-api-ssl.google.com/maps?hl=en-GB&ll=24.929,67.040948&output=embed&q=24.928435,67.040924+(Habbah+Educational+Trust)&z=17"
+              src="https://maps.google.com/maps?q=Habbah+Educational+Trust%2C+F-100%2C+Block-B%2C+North+Nazimabad%2C+Karachi%2C+Pakistan&output=embed"
+              title="Map showing Habbah Educational Trust's office in North Nazimabad, Karachi"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -20,15 +20,32 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const pillBgRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
 
+  // Auto-hide on scroll down, reappear on scroll up — otherwise the fixed
+  // bar sits on top of scrolled-into content indefinitely (most visible
+  // over the home hero's pinned acts). Skipped while the mobile menu is
+  // open so it doesn't slide away mid-interaction.
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    lastScrollY.current = window.scrollY;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+
+      if (!isOpen) {
+        setHidden(currentY > 120 && currentY > lastScrollY.current);
+      }
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -37,6 +54,7 @@ export default function Navbar() {
     const duration = prefersReducedMotion ? 0 : 0.4;
 
     gsap.to(navRef.current, {
+      yPercent: hidden ? -130 : 0,
       paddingTop: scrolled ? "0.5rem" : "1.25rem",
       paddingBottom: scrolled ? "0.5rem" : "1.25rem",
       duration,
@@ -47,7 +65,7 @@ export default function Navbar() {
       duration,
       ease: "power2.out",
     });
-  }, [scrolled]);
+  }, [scrolled, hidden]);
 
   return (
     <nav ref={navRef} className="fixed top-0 w-full z-50 py-5">

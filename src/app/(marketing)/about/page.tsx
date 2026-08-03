@@ -207,7 +207,7 @@ export default function About() {
       </section>
 
       {/* Programs Detailed Grid */}
-      <section className="container mx-auto px-4">
+      <section id="programs" className="container mx-auto px-4 scroll-mt-24">
         <SectionHeader
           title="Our Programs"
           subtitle="Comprehensive support systems designed for student success."

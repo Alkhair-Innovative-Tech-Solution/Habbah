@@ -18,6 +18,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { gsap } from "@/lib/gsap";
+import { GENERAL_INTEREST_JOB_ID } from "@/lib/constants";
 
 const JOB_TYPE_LABELS: Record<string, string> = {
   FULL_TIME: "Full-Time",
@@ -33,12 +34,42 @@ const JOB_TYPE_COLORS: Record<string, string> = {
   CONTRACT: "bg-cream-warm text-charcoal-soft border border-gold-rich/15",
 };
 
+interface Job {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  jobType: string;
+  department?: string | null;
+  deadlineAt?: string | null;
+}
+
+interface ApplyForm {
+  applicantName: string;
+  applicantEmail: string;
+  applicantPhone: string;
+  coverLetter: string;
+  experience: string;
+  education: string;
+}
+
+interface VolunteerForm {
+  name: string;
+  email: string;
+  phone: string;
+  interest: string;
+  message: string;
+}
+
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export default function CareersPage() {
-  const [jobs, setJobs] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [loadingJobs, setLoadingJobs] = useState(true);
-  const [selectedJob, setSelectedJob] = useState<any>(null);
+  const [jobsError, setJobsError] = useState<string | null>(null);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [showApplyModal, setShowApplyModal] = useState(false);
-  const [applyForm, setApplyForm] = useState({
+  const [applyForm, setApplyForm] = useState<ApplyForm>({
     applicantName: "",
     applicantEmail: "",
     applicantPhone: "",
@@ -46,28 +77,37 @@ export default function CareersPage() {
     experience: "",
     education: "",
   });
-  const [applyStatus, setApplyStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [applyStatus, setApplyStatus] = useState<FormStatus>("idle");
   const [applyError, setApplyError] = useState("");
 
   // Volunteer form
-  const [volForm, setVolForm] = useState({
+  const [volForm, setVolForm] = useState<VolunteerForm>({
     name: "",
     email: "",
     phone: "",
     interest: "",
     message: "",
   });
-  const [volStatus, setVolStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [volStatus, setVolStatus] = useState<FormStatus>("idle");
   const [volError, setVolError] = useState("");
+  const applyModalRef = useRef<HTMLDivElement>(null);
+  const firstApplyFieldRef = useRef<HTMLInputElement>(null);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const jobsGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/jobs")
-      .then((r) => r.json())
-      .then((d) => setJobs((d.jobs || []).filter((j: any) => j.id !== 4)))
-      .catch(console.error)
+      .then((r) => {
+        if (!r.ok) throw new Error("Failed to load jobs");
+        return r.json();
+      })
+      .then((d: { jobs?: Job[] }) =>
+        setJobs((d.jobs || []).filter((j) => j.id !== GENERAL_INTEREST_JOB_ID))
+      )
+      .catch(() =>
+        setJobsError("We couldn't load open positions right now. Please refresh the page or try again shortly.")
+      )
       .finally(() => setLoadingJobs(false));
   }, []);
 
@@ -126,12 +166,26 @@ export default function CareersPage() {
     return () => ctx.revert();
   }, [jobs]);
 
-  const openApply = (job: any) => {
+  const openApply = (job: Job) => {
     setSelectedJob(job);
     setApplyStatus("idle");
     setApplyForm({ applicantName: "", applicantEmail: "", applicantPhone: "", coverLetter: "", experience: "", education: "" });
     setShowApplyModal(true);
   };
+
+  // Modal accessibility: close on Escape, and move focus into the dialog
+  // so keyboard/screen-reader users land somewhere sensible on open.
+  useEffect(() => {
+    if (!showApplyModal) return;
+
+    firstApplyFieldRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowApplyModal(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showApplyModal]);
 
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -238,6 +292,12 @@ export default function CareersPage() {
           <div className="flex flex-col items-center py-20">
             <div className="w-16 h-16 border-4 border-green-deep/10 border-t-gold-rich rounded-full animate-spin mb-4" />
             <p className="font-body text-charcoal-soft/60 font-medium uppercase tracking-widest text-sm">Loading jobs...</p>
+          </div>
+        ) : jobsError ? (
+          <div className="text-center py-20 bg-red-50 rounded-[3rem] border-2 border-dashed border-red-200">
+            <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
+            <p className="font-display text-green-deep font-medium text-2xl mb-2">Couldn't Load Positions</p>
+            <p className="font-body text-charcoal-soft/60">{jobsError}</p>
           </div>
         ) : jobs.length === 0 ? (
           <div className="text-center py-20 bg-cream-warm rounded-[3rem] border-2 border-dashed border-gold-rich/20">
@@ -369,12 +429,14 @@ export default function CareersPage() {
                     <p className="font-body text-charcoal-soft/60 text-sm mb-8">Join our community of changemakers</p>
 
                     <form onSubmit={handleVolSubmit} className="space-y-5">
-                      {[
-                        { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
-                        { label: "Email Address", name: "email", type: "email", placeholder: "your@email.com", required: true },
-                        { label: "Phone Number", name: "phone", type: "tel", placeholder: "+92 300 0000000" },
-                        { label: "Area of Interest", name: "interest", type: "text", placeholder: "e.g. Teaching, Mentoring, Administration" },
-                      ].map((field) => (
+                      {(
+                        [
+                          { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
+                          { label: "Email Address", name: "email", type: "email", placeholder: "your@email.com", required: true },
+                          { label: "Phone Number", name: "phone", type: "tel", placeholder: "+92 300 0000000" },
+                          { label: "Area of Interest", name: "interest", type: "text", placeholder: "e.g. Teaching, Mentoring, Administration" },
+                        ] as { label: string; name: keyof VolunteerForm; type: string; placeholder: string; required?: boolean }[]
+                      ).map((field) => (
                         <div key={field.name} className="flex flex-col gap-1.5">
                           <label className="font-body text-xs font-medium text-green-deep uppercase tracking-widest">
                             {field.label} {field.required && <span className="text-gold-deep">*</span>}
@@ -382,7 +444,7 @@ export default function CareersPage() {
                           <input
                             type={field.type}
                             name={field.name}
-                            value={(volForm as any)[field.name]}
+                            value={volForm[field.name]}
                             onChange={(e) => setVolForm((p) => ({ ...p, [e.target.name]: e.target.value }))}
                             placeholder={field.placeholder}
                             required={field.required}
@@ -443,6 +505,10 @@ export default function CareersPage() {
             onClick={(e) => e.target === e.currentTarget && setShowApplyModal(false)}
           >
             <motion.div
+              ref={applyModalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="apply-modal-title"
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -452,7 +518,7 @@ export default function CareersPage() {
               <div className="flex items-start justify-between mb-8">
                 <div>
                   <p className="font-body text-xs font-medium text-gold-deep uppercase tracking-widest mb-1">Apply For</p>
-                  <h3 className="font-display text-2xl font-medium text-green-deep">{selectedJob.title}</h3>
+                  <h3 id="apply-modal-title" className="font-display text-2xl font-medium text-green-deep">{selectedJob.title}</h3>
                   <p className="font-body text-charcoal-soft/60 text-sm mt-1 flex items-center gap-1">
                     <MapPin className="w-3 h-3" /> {selectedJob.location}
                   </p>
@@ -485,21 +551,24 @@ export default function CareersPage() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleApplySubmit} className="space-y-5">
-                  {[
-                    { label: "Full Name", name: "applicantName", type: "text", placeholder: "Your full name", required: true },
-                    { label: "Email Address", name: "applicantEmail", type: "email", placeholder: "your@email.com", required: true },
-                    { label: "Phone Number", name: "applicantPhone", type: "tel", placeholder: "+92 300 0000000" },
-                    { label: "Years of Experience", name: "experience", type: "text", placeholder: "e.g. 3 years" },
-                    { label: "Education", name: "education", type: "text", placeholder: "e.g. Bachelor's in Management" },
-                  ].map((field) => (
+                  {(
+                    [
+                      { label: "Full Name", name: "applicantName", type: "text", placeholder: "Your full name", required: true },
+                      { label: "Email Address", name: "applicantEmail", type: "email", placeholder: "your@email.com", required: true },
+                      { label: "Phone Number", name: "applicantPhone", type: "tel", placeholder: "+92 300 0000000" },
+                      { label: "Years of Experience", name: "experience", type: "text", placeholder: "e.g. 3 years" },
+                      { label: "Education", name: "education", type: "text", placeholder: "e.g. Bachelor's in Management" },
+                    ] as { label: string; name: keyof ApplyForm; type: string; placeholder: string; required?: boolean }[]
+                  ).map((field, i) => (
                     <div key={field.name} className="flex flex-col gap-1.5">
                       <label className="font-body text-xs font-medium text-green-deep uppercase tracking-widest">
                         {field.label} {field.required && <span className="text-gold-deep">*</span>}
                       </label>
                       <input
+                        ref={i === 0 ? firstApplyFieldRef : undefined}
                         type={field.type}
                         name={field.name}
-                        value={(applyForm as any)[field.name]}
+                        value={applyForm[field.name]}
                         onChange={(e) => setApplyForm((p) => ({ ...p, [e.target.name]: e.target.value }))}
                         placeholder={field.placeholder}
                         required={field.required}
