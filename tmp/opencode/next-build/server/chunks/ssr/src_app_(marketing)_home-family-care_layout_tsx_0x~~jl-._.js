@@ -1,0 +1,3 @@
+module.exports=[89851,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Home & Family Care Pathways | Habbah Education Trust",description:"Habbah's Home & Family Care Pathways prepare young people — especially women — for dignified livelihoods in home care, early childhood support, and family services. In partnership with Idara Al Khair."}])},93698,a=>{a.n(a.i(89851))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_home-family-care_layout_tsx_0x~~jl-._.js.map

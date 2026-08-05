@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Success Stories | Habbah Education Trust",
+  title: "Stories of Growth | Habbah Education Trust",
   description:
-    "Meet the brilliant minds who transformed their lives with the support of Habbah's interest-free loans, scholarships, and mentorship programmes.",
+    "Stories of growth from across the Habbah community — university students, vocational trainees, families, and alumni. Real journeys of capability, trust, and contribution.",
 };
 
 export default function SuccessStoriesLayout({

@@ -3,8 +3,28 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { Mail, Phone, MapPin, Globe, Send, Camera, Briefcase } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Send, Camera, Briefcase, ArrowUpRight } from "lucide-react";
 import { gsap } from "@/lib/gsap";
+
+const INITIATIVES = [
+  { label: "Elevated Pathways — Hunar", href: "/elevated-pathways" },
+  { label: "Home & Family Care Pathways", href: "/home-family-care" },
+  { label: "University Opportunity / Qarz-e-Hasna", href: "/qarz-e-hasna" },
+];
+
+const PARTNERS = [
+  { label: "Idara Al Khair", href: "/partners/al-khair" },
+  { label: "Hunar Foundation", href: "/partners/hunar" },
+  { label: "Generations School", href: "/partners/generations" },
+  { label: "CEF — Character Education Foundation", href: "/partners/cef" },
+];
+
+const QUICK_LINKS = [
+  { label: "About Us", href: "/about" },
+  { label: "Stories of Growth", href: "/success-stories" },
+  { label: "Contribute", href: "/contribute" },
+  { label: "Contact Us", href: "/contact" },
+];
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -54,8 +74,9 @@ export default function Footer() {
               <span className="font-display text-3xl font-medium tracking-tight">HABBAH</span>
             </Link>
             <p className="font-body font-light text-off-white/60 leading-relaxed text-lg">
-              Empowering future leaders through quality education and interest-free loans.
-              Join us in building a more equitable future.
+              Cultivating educational and human-development pathways — helping
+              young people grow in capability, access opportunity, discover
+              direction, and contribute to a thriving Pakistan.
             </p>
             <div className="flex gap-5">
               {/* TODO: hrefs are placeholders until real social profile URLs are provided. */}
@@ -76,17 +97,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation */}
           <div className="footer-reveal">
             <h4 className="font-body text-lg font-medium uppercase tracking-[0.2em] text-gold-rich mb-8">Navigation</h4>
             <ul className="space-y-5">
-              {[
-                { label: "About Us", href: "/about" },
-                { label: "Application Process", href: "/application-process" },
-                { label: "Success Stories", href: "/success-stories" },
-                { label: "Contact Us", href: "/contact" },
-              ].map((link) => (
-                <li key={link.label}>
+              {QUICK_LINKS.map((link) => (
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="font-body text-off-white/60 hover:text-off-white transition-all flex items-center gap-3 group"
@@ -101,17 +117,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Initiatives + Careers */}
+          {/* Initiatives + Partners */}
           <div className="footer-reveal">
             <h4 className="font-body text-lg font-medium uppercase tracking-[0.2em] text-gold-rich mb-8">Initiatives</h4>
-            <ul className="space-y-5">
-              {[
-                { label: "Interest-free Loans", href: "/about#programs" },
-                { label: "Scholarships", href: "/about#programs" },
-                { label: "Mentorship", href: "/about#programs" },
-                { label: "Career Guidance", href: "/careers" },
-              ].map((link) => (
-                <li key={link.label}>
+            <ul className="space-y-5 mb-10">
+              {INITIATIVES.map((link) => (
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="font-body text-off-white/60 hover:text-off-white transition-all flex items-center gap-3 group"
@@ -123,20 +134,23 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
 
-              <li>
-                <Link
-                  href="/careers"
-                  className="flex items-center gap-3 group"
-                >
-                  <div className="flex items-center gap-2 px-4 py-2 bg-gold-rich/10 hover:bg-gold-rich border border-gold-rich/30 hover:border-gold-rich rounded-xl transition-all duration-300">
-                    <Briefcase className="w-4 h-4 text-gold-rich group-hover:text-green-deep transition-colors" />
-                    <span className="font-body font-medium text-gold-rich group-hover:text-green-deep transition-colors text-sm uppercase tracking-widest">
-                      Careers
+            <h4 className="font-body text-lg font-medium uppercase tracking-[0.2em] text-gold-rich mb-8">Partners</h4>
+            <ul className="space-y-5">
+              {PARTNERS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-body text-off-white/60 hover:text-off-white transition-all flex items-center gap-3 group"
+                  >
+                    <div className="w-1.5 h-1.5 bg-gold-rich rounded-full opacity-0 group-hover:opacity-100 transition-all" />
+                    <span className="group-hover:translate-x-1 transition-transform">
+                      {link.label}
                     </span>
-                  </div>
-                </Link>
-              </li>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -145,7 +159,7 @@ export default function Footer() {
             <h4 className="font-body text-lg font-medium uppercase tracking-[0.2em] text-gold-rich mb-8">Get in Touch</h4>
             <ul className="space-y-6">
               {[
-                { Icon: MapPin, text: "North Nazimabad, Karachi" },
+                { Icon: MapPin, text: "Generation's School South Campus, SITE, Karachi" },
                 { Icon: Phone, text: "+92 300 0220635" },
                 { Icon: Mail, text: "habbahclub@gmail.com" },
               ].map((item, i) => (
@@ -157,6 +171,15 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <Link
+              href="/contribute"
+              className="mt-8 inline-flex items-center gap-2 px-5 py-3 bg-gold-rich/10 hover:bg-gold-rich border border-gold-rich/30 hover:border-gold-rich rounded-xl transition-all duration-300 group"
+            >
+              <span className="font-body font-medium text-gold-rich group-hover:text-green-deep transition-colors text-sm uppercase tracking-widest">
+                Contribute
+              </span>
+              <ArrowUpRight className="w-4 h-4 text-gold-rich group-hover:text-green-deep transition-colors" />
+            </Link>
           </div>
         </div>
 

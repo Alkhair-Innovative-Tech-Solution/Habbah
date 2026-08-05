@@ -1,0 +1,3 @@
+module.exports=[33990,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"About Habbah | Habbah Education Trust",description:"Habbah cultivates educational and human-development pathways that enable young people to grow in capability, access opportunity, discover direction, and contribute to a thriving Pakistan."}])},15700,a=>{a.n(a.i(33990))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_about_layout_tsx_0l73~qs._.js.map

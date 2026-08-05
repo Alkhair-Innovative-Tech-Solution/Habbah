@@ -1,0 +1,3 @@
+module.exports=[37209,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Contribute | Habbah Education Trust",description:"Contribute to Habbah — sponsor a student, fund a programme, partner as an institution, or refer a young person whose talent deserves a pathway."}])},99664,a=>{a.n(a.i(37209))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_contribute_layout_tsx_0r511kn._.js.map

@@ -4,36 +4,50 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  HandCoins,
   ArrowRight,
   MapPin,
   GraduationCap,
-  UserRoundCheck,
+  Sparkles,
+  HeartHandshake,
+  Handshake,
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import GlassCard from "@/components/GlassCard";
 import Hero from "@/components/home/Hero";
 import { gsap } from "@/lib/gsap";
 
-const WHY_CHOOSE = [
+const OUR_WORK = [
   {
-    title: "Convenient Repayment",
-    desc: "Interest-free loans with flexible repayment plans tailored to your financial situation.",
-    icon: HandCoins,
+    title: "Elevated Pathways",
+    partner: "Hunar Foundation",
+    tagline: "Skills that strengthen families. Sha'oor that opens doors.",
+    icon: Sparkles,
     img: "/unnamed (1).jpg",
+    href: "/elevated-pathways",
   },
   {
-    title: "Tailored Loan Programmes",
-    desc: "Specialized financial support for various undergraduate degrees in top universities.",
-    icon: GraduationCap,
+    title: "Home & Family Care Pathways",
+    partner: "Idara Al Khair",
+    tagline: "From home to community. Care as a livelihood.",
+    icon: HeartHandshake,
     img: "/unnamed (2).jpg",
+    href: "/home-family-care",
   },
   {
-    title: "Guidance & Counselling",
-    desc: "Professional mentorship and career advice to help you navigate your educational journey.",
-    icon: UserRoundCheck,
+    title: "University Opportunity",
+    partner: "Qarz-e-Hasna",
+    tagline: "Opening doors that talent has earned.",
+    icon: GraduationCap,
     img: "/unnamed.jpg",
+    href: "/qarz-e-hasna",
   },
+];
+
+const PARTNERS = [
+  { name: "Idara Al Khair", href: "/partners/al-khair" },
+  { name: "Hunar Foundation", href: "/partners/hunar" },
+  { name: "Generations School", href: "/partners/generations" },
+  { name: "CEF — Character Education Foundation", href: "/partners/cef" },
 ];
 
 const TEAM = [
@@ -50,7 +64,7 @@ export default function Home() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(".why-card").forEach((el, i) => {
+      gsap.utils.toArray<HTMLElement>(".our-work-card").forEach((el, i) => {
         gsap.from(el, {
           y: 40,
           opacity: 0,
@@ -59,6 +73,14 @@ export default function Home() {
           ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 85%" },
         });
+      });
+
+      gsap.from(".partners-strip", {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".partners-strip", start: "top 88%" },
       });
 
       gsap.from(".team-member", {
@@ -110,25 +132,19 @@ export default function Home() {
     <div ref={rootRef} className="flex flex-col gap-24 pb-24">
       <Hero />
 
-      {/*
-        NOTE: copy below is unchanged per the visual-only redesign scope —
-        it still frames Habbah as loan-only (Field C of five), not the whole
-        trust. Content rewrite is a separate, deliberate follow-up.
-      */}
-
-      {/* Why Choose Habbah */}
+      {/* Our Work */}
       <section id="explore" className="container mx-auto px-4 scroll-mt-24">
         <SectionHeader
-          title="Why choose Habbah"
-          subtitle="Discover how we support students in achieving their academic dreams through a sustainable and trust-based model."
+          title="Our Work"
+          subtitle="Habbah runs more than one kind of support. Across education, skills, and livelihoods, we walk alongside young people whose talent has already proven itself."
         />
 
-        <div className="why-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          {WHY_CHOOSE.map((item, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          {OUR_WORK.map((item, idx) => (
             <GlassCard
               key={idx}
               animateOnScroll={false}
-              className="why-card group overflow-hidden"
+              className="our-work-card group overflow-hidden flex flex-col"
             >
               <div className="relative h-78 -mx-8 -mt-8 mb-6 overflow-hidden">
                 <Image
@@ -142,10 +158,50 @@ export default function Home() {
                   <item.icon className="w-6 h-6 text-green-deep" />
                 </div>
               </div>
-              <h3 className="font-display text-2xl font-medium text-green-deep mb-4">{item.title}</h3>
-              <p className="font-body text-charcoal-soft leading-relaxed">{item.desc}</p>
+              <div className="flex flex-col gap-4 flex-1">
+                <div className="inline-flex self-start items-center gap-2 px-3 py-1.5 rounded-full bg-green-deep/5 border border-gold-rich/25 font-body text-xs font-medium text-green-deep uppercase tracking-widest">
+                  <Handshake className="w-3.5 h-3.5 text-gold-deep" />
+                  {item.partner}
+                </div>
+                <h3 className="font-display text-3xl font-medium text-green-deep tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="font-body text-charcoal-soft leading-relaxed">{item.tagline}</p>
+                <Link
+                  href={item.href}
+                  className="mt-auto inline-flex items-center gap-2 font-body font-medium text-green-deep uppercase tracking-widest text-sm group/btn pt-4"
+                >
+                  Learn More
+                  <ArrowRight className="w-4 h-4 text-gold-deep group-hover/btn:translate-x-2 transition-transform" />
+                </Link>
+              </div>
             </GlassCard>
           ))}
+        </div>
+      </section>
+
+      {/* Partners Strip */}
+      <section className="partners-strip container mx-auto px-4">
+        <p className="section-label text-center font-body text-gold-deep font-medium uppercase tracking-[0.3em] text-sm mb-10">
+          Our Partners
+        </p>
+        <div className="relative overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+          <div className="flex w-max animate-marquee gap-6">
+            {[...PARTNERS, ...PARTNERS].map((partner, i) => (
+              <Link
+                key={`${partner.name}-${i}`}
+                href={partner.href}
+                className="shrink-0 flex items-center gap-3 px-8 py-5 rounded-3xl bg-cream-warm border border-gold-rich/20 hover:border-gold-rich hover:bg-off-white transition-all duration-300 group"
+              >
+                <div className="w-10 h-10 rounded-2xl bg-green-deep text-gold-rich flex items-center justify-center font-display text-xl font-medium group-hover:bg-gold-rich group-hover:text-green-deep transition-colors">
+                  {partner.name.charAt(0)}
+                </div>
+                <span className="font-body font-medium text-green-deep whitespace-nowrap">
+                  {partner.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -248,7 +304,7 @@ export default function Home() {
                 <div>
                   <h4 className="font-display text-xl font-medium text-green-deep mb-1">Visit Our Office</h4>
                   <p className="font-body text-charcoal-soft leading-relaxed">
-                    Generation's School South Campus,<br />
+                    Generation&apos;s School South Campus,<br />
                     SITE, Karachi, Pakistan.
                   </p>
                 </div>
@@ -267,7 +323,7 @@ export default function Home() {
 
           <div className="relative z-10">
             <div className="inline-block px-6 py-2 rounded-full bg-off-white/5 border border-gold-rich/20 text-gold-rich text-sm font-medium uppercase tracking-[0.3em] mb-8">
-              Ready to begin?
+              Grow with us
             </div>
 
             <h2 className="font-display text-5xl md:text-7xl font-light mb-10 leading-[1.1] tracking-tight">
@@ -281,11 +337,17 @@ export default function Home() {
 
             <div className="flex flex-wrap justify-center gap-6">
               <Link
-                href="/contact"
+                href="/qarz-e-hasna"
                 className="font-body bg-gold-rich hover:bg-off-white text-green-deep px-12 py-6 rounded-full font-medium text-xl transition-all hover:-translate-y-1 active:scale-95 flex items-center gap-3 group/btn"
               >
                 Start Your Application
                 <ArrowRight className="w-6 h-6 group-hover/btn:translate-x-2 transition-transform" />
+              </Link>
+              <Link
+                href="/contribute"
+                className="font-body border border-gold-rich/50 hover:border-gold-rich text-gold-pale hover:text-gold-rich px-12 py-6 rounded-full font-medium text-xl transition-all hover:-translate-y-1 active:scale-95 flex items-center gap-3"
+              >
+                Contribute
               </Link>
             </div>
           </div>

@@ -1,0 +1,3 @@
+module.exports=[7099,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Elevated Pathways at Hunar | Habbah Education Trust",description:"Habbah's Elevated Pathways programme adds the sha'oor layer to Hunar Foundation's vocational training — the awareness, confidence, and life readiness that convert a skill into a livelihood."}])},4258,a=>{a.n(a.i(7099))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_elevated-pathways_layout_tsx_0bk6ofb._.js.map

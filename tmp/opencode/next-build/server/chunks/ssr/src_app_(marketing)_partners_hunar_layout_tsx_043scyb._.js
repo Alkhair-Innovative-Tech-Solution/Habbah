@@ -1,0 +1,3 @@
+module.exports=[21601,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Hunar Foundation | Habbah Partners",description:"Habbah's partnership with Hunar Foundation adds the sha'oor layer to vocational training — the awareness, confidence, and life readiness that convert a skill into a livelihood."}])},176,a=>{a.n(a.i(21601))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_partners_hunar_layout_tsx_043scyb._.js.map

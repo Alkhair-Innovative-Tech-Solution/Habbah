@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Clock,
   HandCoins,
@@ -9,12 +10,72 @@ import {
   GraduationCap,
   Sparkles,
   MapPin,
+  ArrowRight,
+  Compass,
+  BookOpen,
+  HeartHandshake,
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import GlassCard from "@/components/GlassCard";
 import PageHero from "@/components/PageHero";
 import AyahBlock from "@/components/home/AyahBlock";
 import { gsap } from "@/lib/gsap";
+
+const FIELDS = [
+  {
+    title: "Elevated Pathways",
+    desc: "The sha'oor layer over vocational training — awareness, confidence, and life readiness that convert a skill into a livelihood.",
+    icon: BookOpen,
+    href: "/elevated-pathways",
+  },
+  {
+    title: "Home & Family Care Pathways",
+    desc: "Dignified livelihoods in home care, early childhood support, and family services — strengthening families from the inside out.",
+    icon: HeartHandshake,
+    href: "/home-family-care",
+  },
+  {
+    title: "Qarz-e-Hasna — University Opportunity",
+    desc: "Interest-free, trust-based support for university students whose capability has already been proven.",
+    icon: HandCoins,
+    href: "/qarz-e-hasna",
+  },
+  {
+    title: "The Better Question — Compass Fellowship",
+    desc: "A formation-focused fellowship helping young people discover what they are serving, and why it matters.",
+    icon: Compass,
+    href: "/partners/cef",
+  },
+  {
+    title: "ACE Foundational Curriculum Architecture",
+    desc: "Character education built into foundational curriculum — becoming as well as learning.",
+    icon: Sparkles,
+    href: "/partners/cef",
+  },
+];
+
+const VALUES = [
+  {
+    internal: "Amanah",
+    public: "Stewardship and responsibility",
+    desc: "What is entrusted to us is held with care — from every contribution to every student's journey.",
+  },
+  {
+    internal: "Qibla",
+    public: "Purpose; knowing what you are serving",
+    desc: "Direction before momentum. A young person who knows what they serve can navigate anything.",
+  },
+  {
+    internal: "Tarbiyah",
+    public: "Character; becoming as well as learning",
+    desc: "Skills open doors; character decides what happens on the other side.",
+  },
+  {
+    internal: "Barakah",
+    public: "Multiplying impact",
+    desc: "A single seed, returned and regrown — today's beneficiary becomes tomorrow's contributor.",
+  },
+];
 
 const PROGRAMS = [
   {
@@ -47,6 +108,14 @@ export default function About() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
+      gsap.from(".mandate-reveal", {
+        y: 40,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".mandate-reveal", start: "top 85%" },
+      });
+
       gsap.from(".impact-text", {
         x: -40,
         opacity: 0,
@@ -77,12 +146,34 @@ export default function About() {
         scrollTrigger: { trigger: ".club-text", start: "top 80%" },
       });
 
+      gsap.utils.toArray<HTMLElement>(".field-card").forEach((el, i) => {
+        gsap.from(el, {
+          y: 40,
+          opacity: 0,
+          delay: i * 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 85%" },
+        });
+      });
+
       gsap.utils.toArray<HTMLElement>(".program-card").forEach((el, i) => {
         gsap.from(el, {
           y: 40,
           opacity: 0,
           delay: i * 0.1,
           duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 85%" },
+        });
+      });
+
+      gsap.utils.toArray<HTMLElement>(".value-row").forEach((el, i) => {
+        gsap.from(el, {
+          y: 30,
+          opacity: 0,
+          delay: i * 0.08,
+          duration: 0.7,
           ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 85%" },
         });
@@ -98,12 +189,33 @@ export default function About() {
         eyebrow="Learn Our Story"
         title="About"
         accent="Habbah"
-        subtitle="Habbah Educational Trust is dedicated to assisting deserving students in Pakistan by providing financial support for their bachelor's degree programmes."
+        subtitle="Habbah cultivates educational and human-development pathways — helping young people grow in capability, access opportunity, and contribute to a thriving Pakistan."
         image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2000&auto=format&fit=crop"
         imageAlt="Students collaborating"
       />
 
       <AyahBlock />
+
+      {/* Mandate */}
+      <section className="container mx-auto px-4">
+        <div className="mandate-reveal glass-brand-dark rounded-[4rem] p-12 md:p-20 text-center text-off-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-125 h-125 bg-gold-rich/10 rounded-full -mr-64 -mt-64 blur-[100px]" />
+          <div className="absolute bottom-0 left-0 w-100 h-100 bg-green-rich/40 rounded-full -ml-48 -mb-48 blur-[80px]" />
+
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <div className="inline-block px-6 py-2 rounded-full bg-off-white/5 border border-gold-rich/20 text-gold-rich text-sm font-medium uppercase tracking-[0.3em] mb-10">
+              Our Mandate
+            </div>
+            <p className="font-display text-3xl md:text-5xl font-light leading-[1.25]">
+              To cultivate educational and human-development pathways that enable
+              young people to grow in <span className="gold-shimmer-text">capability</span>,
+              access <span className="gold-shimmer-text">opportunity</span>, discover{" "}
+              <span className="gold-shimmer-text">direction</span>, and contribute
+              meaningfully to a vibrant and thriving Pakistan.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* The Impact Section */}
       <section className="container mx-auto px-4">
@@ -145,7 +257,7 @@ export default function About() {
                 <div className="glass-brand p-8 rounded-3xl border-l-4 border-gold-rich shadow-2xl">
                   <div className="flex justify-between items-center">
                     <div>
-                      <p className="font-display font-medium text-2xl text-green-deep mb-1">Members' Meetup</p>
+                      <p className="font-display font-medium text-2xl text-green-deep mb-1">Members&apos; Meetup</p>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-gold-deep" />
                         <p className="font-body text-gold-deep font-medium uppercase tracking-widest text-[10px]">Karachi, Pakistan — 2018</p>
@@ -194,7 +306,7 @@ export default function About() {
               <div className="glass-brand p-8 rounded-3xl border-l-8 border-gold-rich shadow-xl">
                 <h3 className="font-display text-2xl font-medium text-green-deep mb-4 flex items-center gap-3">
                   <Sparkles className="text-gold-rich w-8 h-8" />
-                  Today's Beneficiary... Tomorrow's Contributor
+                  Today&apos;s Beneficiary... Tomorrow&apos;s Contributor
                 </h3>
                 <p className="font-body text-charcoal-soft leading-relaxed">
                   Student members benefit from strong communal support through the Habbah Club – a platform that brings together Habbah alumni and aspiring members to interact, share resources, and provide career guidance.
@@ -206,10 +318,79 @@ export default function About() {
         <div className="absolute top-0 right-0 w-150 h-150 bg-gold-rich/10 rounded-full blur-[120px]" />
       </section>
 
+      {/* Fields of Work */}
+      <section className="container mx-auto px-4">
+        <SectionHeader
+          title="Our Fields of Work"
+          subtitle="More than one kind of support — pathways across education, skills, character, and care."
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+          {FIELDS.map((field, idx) => (
+            <GlassCard
+              key={idx}
+              animateOnScroll={false}
+              className="field-card p-8 flex flex-col hover:border-gold-rich transition-all"
+            >
+              <div className="flex items-start justify-between mb-6">
+                <div className="p-4 bg-green-deep text-gold-rich rounded-2xl shadow-xl group-hover:rotate-6 transition-transform">
+                  <field.icon className="w-7 h-7" />
+                </div>
+                <span className="font-display text-4xl font-light text-gold-rich/20">
+                  0{idx + 1}
+                </span>
+              </div>
+              <h3 className="font-display text-2xl font-medium text-green-deep mb-3">
+                {field.title}
+              </h3>
+              <p className="font-body text-charcoal-soft leading-relaxed mb-6">
+                {field.desc}
+              </p>
+              <Link
+                href={field.href}
+                className="mt-auto inline-flex items-center gap-2 font-body font-medium text-green-deep uppercase tracking-widest text-sm group/btn"
+              >
+                Learn more
+                <ArrowRight className="w-4 h-4 text-gold-deep group-hover/btn:translate-x-2 transition-transform" />
+              </Link>
+            </GlassCard>
+          ))}
+
+          {/* Fill card linking to partners overview */}
+          <GlassCard
+            animateOnScroll={false}
+            className="field-card p-8 flex flex-col bg-cream-warm border-dashed border-gold-rich/30 hover:border-gold-rich transition-all"
+          >
+            <div className="flex items-start justify-between mb-6">
+              <div className="p-4 bg-gold-rich text-green-deep rounded-2xl shadow-xl group-hover:rotate-6 transition-transform">
+                <Users className="w-7 h-7" />
+              </div>
+              <span className="font-display text-4xl font-light text-gold-rich/20">
+                06
+              </span>
+            </div>
+            <h3 className="font-display text-2xl font-medium text-green-deep mb-3">
+              The Partners Behind the Pathways
+            </h3>
+            <p className="font-body text-charcoal-soft leading-relaxed mb-6">
+              Idara Al Khair, Hunar Foundation, Generations School, and CEF —
+              the institutions who share this field with us.
+            </p>
+            <Link
+              href="/partners"
+              className="mt-auto inline-flex items-center gap-2 font-body font-medium text-green-deep uppercase tracking-widest text-sm group/btn"
+            >
+              Meet our partners
+              <ArrowRight className="w-4 h-4 text-gold-deep group-hover/btn:translate-x-2 transition-transform" />
+            </Link>
+          </GlassCard>
+        </div>
+      </section>
+
       {/* Programs Detailed Grid */}
       <section id="programs" className="container mx-auto px-4 scroll-mt-24">
         <SectionHeader
-          title="Our Programs"
+          title="Programme Support"
           subtitle="Comprehensive support systems designed for student success."
         />
 
@@ -246,6 +427,48 @@ export default function About() {
               </div>
             </GlassCard>
           ))}
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="bg-cream-warm py-32 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-150 h-150 bg-gold-rich/10 rounded-full -mr-80 -mt-80 blur-[120px]" />
+        <div className="container mx-auto px-4 relative z-10">
+          <SectionHeader
+            title="What We Hold Dear"
+            subtitle="Internal values, in the public language of everyday trust."
+          />
+
+          <div className="max-w-5xl mx-auto mt-16 space-y-6">
+            {VALUES.map((value, idx) => (
+              <div
+                key={idx}
+                className="value-row grid grid-cols-1 lg:grid-cols-3 gap-6 items-center bg-off-white rounded-[2rem] p-8 md:p-10 shadow-xl border-b-4 border-gold-rich"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-green-deep text-gold-rich flex items-center justify-center shrink-0 font-display text-xl font-medium">
+                    {value.internal.charAt(0)}
+                  </div>
+                  <div>
+                    <h3 className="font-display text-2xl font-medium text-green-deep">
+                      {value.internal}
+                    </h3>
+                    <p className="font-body text-gold-deep font-medium uppercase tracking-widest text-xs mt-1">
+                      Internal value
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <p className="font-body text-lg text-green-deep font-medium leading-relaxed">
+                    {value.public}
+                  </p>
+                </div>
+                <p className="font-body text-charcoal-soft leading-relaxed lg:border-l lg:border-gold-rich/20 lg:pl-6">
+                  {value.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

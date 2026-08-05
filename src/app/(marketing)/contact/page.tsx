@@ -125,7 +125,7 @@ export default function Contact() {
               </h2>
               <div className="space-y-8">
                 {[
-                  { Icon: MapPin, title: "Our Location", text: "Habbah Educational Trust\nF-100, Block-B, North Nazimabad, Karachi" },
+                  { Icon: MapPin, title: "Our Location", text: "Generation's School South Campus\nSITE, Karachi" },
                   { Icon: Mail, title: "Email Us", text: "habbahclub@gmail.com" },
                   { Icon: Phone, title: "Call Us", text: "+92 300 0220635" },
                 ].map(({ Icon, title, text }) => (
@@ -145,8 +145,8 @@ export default function Contact() {
 
           <div className="reach-map-panel relative rounded-[4rem] overflow-hidden shadow-2xl border-8 border-off-white min-h-125 group">
             <iframe
-              src="https://maps.google.com/maps?q=Habbah+Educational+Trust%2C+F-100%2C+Block-B%2C+North+Nazimabad%2C+Karachi%2C+Pakistan&output=embed"
-              title="Map showing Habbah Educational Trust's office in North Nazimabad, Karachi"
+              src="https://maps.google.com/maps?q=Generation%27s+School+South+Campus%2C+SITE%2C+Karachi%2C+Pakistan&output=embed"
+              title="Map showing Habbah's office at Generation's School South Campus, SITE, Karachi"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/application-process",
+        destination: "/qarz-e-hasna",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/middleware.ts"],"sourcesContent":["import { NextRequest, NextResponse } from \"next/server\";\n\nexport async function middleware(request: NextRequest) {\n  const { pathname } = request.nextUrl;\n\n  // Protect /admin routes (except /admin/login)\n  if (pathname.startsWith(\"/admin\") && !pathname.startsWith(\"/admin/login\")) {\n    const token = request.cookies.get(\"habbah_session\")?.value;\n\n    if (!token) {\n      return NextResponse.redirect(new URL(\"/admin/login\", request.url));\n    }\n  }\n\n  return NextResponse.next();\n}\n\nexport const config = {\n  matcher: [\"/admin/:path*\"],\n};\n"],"names":["middleware","request","pathname","nextUrl","startsWith","token","cookies","get","value","redirect","URL","url","next","config","matcher"],"mappings":";;;;;;AAAA;AAAA;;AAEO,eAAeA,WAAWC,OAAoB;IACnD,MAAM,EAAEC,QAAQ,EAAE,GAAGD,QAAQE,OAAO;IAEpC,8CAA8C;IAC9C,IAAID,SAASE,UAAU,CAAC,aAAa,CAACF,SAASE,UAAU,CAAC,iBAAiB;QACzE,MAAMC,QAAQJ,QAAQK,OAAO,CAACC,GAAG,CAAC,mBAAmBC;QAErD,IAAI,CAACH,OAAO;YACV,OAAO,6MAAY,CAACI,QAAQ,CAAC,IAAIC,IAAI,gBAAgBT,QAAQU,GAAG;QAClE;IACF;IAEA,OAAO,6MAAY,CAACC,IAAI;AAC1B;AAEO,MAAMC,SAAS;IACpBC,SAAS;QAAC;KAAgB;AAC5B"}}]
+}

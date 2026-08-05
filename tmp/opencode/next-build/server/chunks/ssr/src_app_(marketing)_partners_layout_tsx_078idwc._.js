@@ -1,0 +1,3 @@
+module.exports=[45935,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Partners | Habbah Education Trust",description:"Habbah works through trusted partners — Idara Al Khair, Hunar Foundation, Generations School, and CEF — to grow capability, access opportunity, and strengthen communities."}])},33284,a=>{a.n(a.i(45935))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_partners_layout_tsx_078idwc._.js.map

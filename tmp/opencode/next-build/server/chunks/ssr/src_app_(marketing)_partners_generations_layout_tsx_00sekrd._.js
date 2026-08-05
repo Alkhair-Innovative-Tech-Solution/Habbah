@@ -1,0 +1,3 @@
+module.exports=[44150,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Generations School | Habbah Partners",description:"Habbah operates from Generation's School's South Campus in SITE, Karachi — the founding home of Habbah since the trust's inception."}])},28491,a=>{a.n(a.i(44150))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_partners_generations_layout_tsx_00sekrd._.js.map

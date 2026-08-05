@@ -1,0 +1,3 @@
+module.exports=[17139,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Careers | Habbah Education Trust",description:"Be part of a mission-driven team transforming lives through quality education and community support. Explore open positions and volunteer opportunities at Habbah."}])},68001,a=>{a.n(a.i(17139))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_careers_layout_tsx_0864cd4._.js.map

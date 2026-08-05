@@ -1,0 +1,3 @@
+module.exports=[70306,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Contact Us | Habbah Education Trust",description:"Get in touch with Habbah Education Trust — visit our office at Generation's School South Campus in SITE, Karachi, send us a message, or ask about our programmes."}])},75525,a=>{a.n(a.i(70306))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_contact_layout_tsx_0_1_3c_._.js.map

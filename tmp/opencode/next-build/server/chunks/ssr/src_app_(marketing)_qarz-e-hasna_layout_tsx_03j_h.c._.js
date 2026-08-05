@@ -1,0 +1,3 @@
+module.exports=[51637,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Qarz-e-Hasna — University Opportunity | Habbah Education Trust",description:"Habbah's Qarz-e-Hasna is interest-free, trust-based support for university students — since 2012, standing beside capable students whose circumstances should not decide their future."}])},65496,a=>{a.n(a.i(51637))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_qarz-e-hasna_layout_tsx_03j_h.c._.js.map

@@ -1,0 +1,3 @@
+module.exports=[43160,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Idara Al Khair | Habbah Partners",description:"Habbah's community programmes run through Idara Al Khair, a trusted institution serving underserved communities in Karachi."}])},46411,a=>{a.n(a.i(43160))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_partners_al-khair_layout_tsx_0xz-c7r._.js.map

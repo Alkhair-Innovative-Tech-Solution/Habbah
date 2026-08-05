@@ -1,0 +1,3 @@
+module.exports=[43032,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"CEF — Character Education Foundation | Habbah Partners",description:"CEF — Character Education Foundation — is Habbah's partner in formation-focused initiatives, including The Better Question and the ACE Foundational Curriculum Architecture."}])},22093,a=>{a.n(a.i(43032))}];
+
+//# sourceMappingURL=src_app_%28marketing%29_partners_cef_layout_tsx_05-3du_._.js.map
